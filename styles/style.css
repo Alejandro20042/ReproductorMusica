@@ -4,6 +4,7 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+  height: 100%;
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -46,12 +47,13 @@ body {
 }
 
 .mainContent {
-  flex: 1;
   display: flex;
   flex-direction: column;
   background-color: #181818;
+  
   border-radius: 0 20px 0 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .centralView {
@@ -200,4 +202,54 @@ body {
   margin-right: 15px;
   margin-left: 10px;
   vertical-align: middle;
+}
+
+.carousel-container {
+  position: relative;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+
+.sliderMenu {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.album {
+  min-width:300px; 
+  margin: 0 15px;
+  flex-wrap: nowrap;
+}
+
+.control {
+  width: 50px;
+  height: 60%;
+  margin: 10px 10px 0px 5px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 2;
+  user-select: none;
+}
+
+.left-control {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.right-control {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
