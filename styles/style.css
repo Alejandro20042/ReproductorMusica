@@ -50,7 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #181818;
-  
+  flex: 1 ;
   border-radius: 0 20px 0 0;
   overflow-y: auto;
   overflow-x: hidden;
@@ -252,4 +252,7 @@ body {
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+.controlPlay{
+  cursor: pointer;
 }

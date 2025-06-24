@@ -54,3 +54,38 @@ leftControl.addEventListener('click', () => {
     updateSlider();
   }
 });
+
+const audio = document.getElementById('audioPlayer');
+    const progressBar = document.getElementById('progressBar');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const playButton = document.querySelector('.controlPlay');
+
+    playButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playButton.textContent = "⏸"; 
+      } else {
+        audio.pause();
+        playButton.textContent = "⏵"; 
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      let currentTime = audio.currentTime;
+      let duration = audio.duration;
+
+      if (duration) {
+        let progress = (currentTime / duration) * 100;
+        progressBar.value = progress;
+
+        let minutes = Math.floor(currentTime / 60);
+        let seconds = Math.floor(currentTime % 60).toString().padStart(2, '0');
+        currentTimeDisplay.textContent = `${minutes}:${seconds}`;
+      }
+    });
+
+    const volumeSlider = document.getElementById('volumeSlider');
+
+    volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value;
+    });
