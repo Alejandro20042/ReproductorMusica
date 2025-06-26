@@ -4,6 +4,7 @@ const currentTimeDisplay = document.getElementById('currentTime');
 const playButton = document.querySelector('.controlPlay');
 const volumeSlider = document.getElementById('volumeSlider');
 let allSongs = [];
+const searchInput = document.getElementById("searchInput");
 
 playButton.addEventListener('click', () => {
   if (audio.paused) {
@@ -66,7 +67,7 @@ function getListAlbumLastest(canciones){
     }
   });
 
-  albums.slice(0, 4).forEach(album => {
+  albums.slice(0, 5).forEach(album => {
     const li = document.createElement("li");
     li.className = "albums";
     li.innerHTML = `
@@ -81,7 +82,7 @@ function getListLatestSingles(canciones) {
   const singleList = document.getElementById("singleList");
   singleList.innerHTML = "";
 
-  canciones.slice(0, 4).forEach(cancion => {
+  canciones.slice(0, 5).forEach(cancion => {
     const li = document.createElement("li");
     li.className = "albumssingle";
     li.innerHTML = `
@@ -91,5 +92,50 @@ function getListLatestSingles(canciones) {
     singleList.appendChild(li);
   });
 }
+
+function searchResult(canciones){
+  const container = document.getElementById("searchResults")
+
+  container.innerHTML = "";
+  
+  canciones.forEach(cancion => {
+    const cards = document.createElement("div");
+
+    cards.className = "itmens-search";
+    cards.innerHTML = `
+      <div class="search-item-info">
+        <strong>${cancion.titulo}</strong><br>
+        ${cancion.artistaCompleto.nombre}<br>
+        <small>${cancion.duracion}</small>
+      </div>
+    `;
+
+    container.appendChild(cards);
+  })
+  if (canciones.length === 0) {
+    container.style.backgroundColor = "transparent";
+    container.textContent = "No se encontraron resultados.";
+    return;
+  }else{
+    container.style.backgroundColor = ""
+  }
+}
+
+searchInput.addEventListener("input", e => {
+    const terminos =  e.target.value.toLowerCase().trim();
+
+      if (terminos === "") {
+          document.getElementById("searchResults").innerHTML = "";
+          return;
+      }
+
+
+    const filter = allSongs.filter(song => 
+      song.titulo.toLowerCase().includes(terminos) || 
+      song.artistaCompleto.nombre.toLowerCase().includes(terminos)
+    );
+    searchResult(filter);
+});
+
 getApi();
 
