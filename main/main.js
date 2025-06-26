@@ -5,6 +5,7 @@ const playButton = document.querySelector('.controlPlay');
 const volumeSlider = document.getElementById('volumeSlider');
 let allSongs = [];
 const searchInput = document.getElementById("searchInput");
+const clearBtn = document.getElementById('clearSearch');
 
 playButton.addEventListener('click', () => {
   if (audio.paused) {
@@ -112,6 +113,7 @@ function searchResult(canciones){
 
     container.appendChild(cards);
   })
+
   if (canciones.length === 0) {
     container.style.backgroundColor = "transparent";
     container.textContent = "No se encontraron resultados.";
@@ -135,6 +137,17 @@ searchInput.addEventListener("input", e => {
       song.artistaCompleto.nombre.toLowerCase().includes(terminos)
     );
     searchResult(filter);
+});
+
+clearBtn.addEventListener('click', () => {
+  searchInput.value = '';
+  searchInput.focus();
+  searchResult([]);
+});
+
+searchInput.addEventListener('input', () => {
+  clearBtn.style.display = searchInput.value ? 'inline' : 'none';
+  
 });
 
 getApi();
